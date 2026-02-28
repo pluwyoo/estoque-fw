@@ -1,0 +1,176 @@
+🧠 Visão Geral
+
+Este projeto é um Sistema de Controle de Estoque desenvolvido em PHP + MySQL, rodando localmente com Laragon, voltado para controle interno de materiais, movimentações e obras/projetos.
+
+O sistema possui:
+
+Controle de login com perfis
+
+Entrada e saída de materiais
+
+Histórico de movimentações
+
+Saída vinculada a obra/projeto
+
+Dashboard com indicadores de estoque
+
+🧱 Tecnologias Utilizadas
+
+PHP (procedural + mysqli)
+
+MySQL
+
+HTML básico
+
+Chart.js (dashboard)
+
+Laragon (ambiente local)
+
+👥 Perfis de Usuário
+
+O sistema trabalha com controle de acesso por perfil:
+
+Perfil	Permissões
+admin	Acesso total (entrada, saída, obras, usuários)
+infra	Movimentar estoque (entrada/saída)
+leitura	Apenas visualização (dashboard, relatórios)
+
+O controle é feito via Includes/auth.php.
+
+🔐 Autenticação
+
+O index.php é a porta de entrada do projeto.
+
+Sempre que o projeto abre no Laragon, o login é exibido.
+
+Após login válido, o usuário é redirecionado para o dashboard.
+
+Sessões utilizadas:
+
+$_SESSION['logado']
+$_SESSION['usuario']
+$_SESSION['perfil']
+📁 Estrutura do Projeto
+/estoque-fw
+│
+├── index.php              → Login inicial
+├── dashboard.php          → Painel de controle
+├── movimentar.php         → Processa entradas e saídas
+├── entrada_estoque.php    → Entrada manual de estoque
+│
+├── Includes/
+│   ├── db.php             → Conexão com o banco
+│   └── auth.php           → Controle de perfil e sessão
+│
+└── README.md
+🗃️ Principais Tabelas do Banco
+materiais
+
+id
+
+nome
+
+categoria
+
+quantidade
+
+minimo
+
+movimentacoes
+
+id
+
+material_id
+
+tipo (entrada | saida)
+
+quantidade
+
+observacao
+
+obra_id (nullable)
+
+data_movimentacao
+
+obras (em desenvolvimento)
+
+id
+
+nome
+
+descricao
+
+status
+
+usuarios
+
+id
+
+usuario
+
+senha (hash)
+
+perfil
+
+🔄 Fluxo de Funcionamento
+
+Usuário acessa o sistema → Login
+
+Sistema valida perfil
+
+Usuário acessa o dashboard
+
+Movimentações:
+
+Entrada → soma estoque
+
+Saída → exige obra + valida saldo
+
+Tudo é registrado no histórico
+
+🧭 Ordem de Desenvolvimento (IMPORTANTE)
+
+Estamos seguindo exatamente esta ordem 👇
+(NÃO vamos pular etapas)
+
+✅ 1️⃣ Login + Perfis (CONCLUÍDO)
+
+Sessão
+
+Controle por perfil
+
+Proteção de páginas
+
+🟡 2️⃣ Saída por Obra / Projeto (EM ANDAMENTO)
+
+⬅️ PONTO ATUAL DO PROJETO
+
+Cadastro de obras
+
+Select de obra na saída
+
+Relacionar movimentação ↔ obra
+
+Relatório de consumo por obra
+
+⏭️ 3️⃣ Histórico avançado
+
+Filtro por período
+
+Filtro por obra
+
+Filtro por material
+
+⏭️ 4️⃣ Alertas inteligentes
+
+Baixo estoque
+
+Sugestão automática de compra
+
+⏭️ 5️⃣ Relatórios e exportações
+
+CSV / Excel
+
+Relatório por obra
+
+Relatório por usuário
